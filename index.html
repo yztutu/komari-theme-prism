@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,27 +10,42 @@
     --glass:rgba(255,255,255,.055); --glass2:rgba(255,255,255,.09);
     --edge:rgba(255,255,255,.11); --edge2:rgba(255,255,255,.2);
     --acc:#4cc9ff; --teal:#2fe6b4; --amber:#ffbe50; --red:#ff6b6b; --violet:#b78cff;
+    --track:rgba(255,255,255,.09); --line:rgba(255,255,255,.07);
     --r:20px; --shadow:0 18px 50px rgba(2,6,18,.45);
   }
+  html[data-theme="light"]{
+    --txt:#17222f; --dim:#4c5c72; --faint:#8296ad;
+    --glass:rgba(255,255,255,.58); --glass2:rgba(255,255,255,.78);
+    --edge:rgba(23,43,77,.13); --edge2:rgba(23,43,77,.24);
+    --track:rgba(15,40,75,.12); --line:rgba(15,40,75,.09);
+    --shadow:0 18px 44px rgba(31,52,92,.16);
+  }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:"PingFang SC","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--txt);background:#0a0d1a;overflow-x:hidden}
+  body{font-family:"PingFang SC","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--txt);background:#0a0d1a;overflow-x:hidden;transition:background .3s}
+  html[data-theme="light"] body{background:#e9eef6}
   body::before{content:"";position:fixed;inset:0;z-index:-2;background:
     radial-gradient(760px 440px at 10% -6%, rgba(56,150,200,.36), transparent 62%),
     radial-gradient(840px 540px at 97% 110%, rgba(112,64,190,.34), transparent 62%),
     radial-gradient(600px 380px at 60% 26%, rgba(30,110,140,.18), transparent 65%),
     linear-gradient(180deg,#0a0e1e,#0a0d1a 55%,#0d0a1e);}
-  body::after{content:"";position:fixed;inset:0;z-index:-1;opacity:.45;
-    background-image:radial-gradient(rgba(255,255,255,.15) .6px, transparent .7px);background-size:130px 130px;
-    mask-image:linear-gradient(180deg,rgba(0,0,0,.5),transparent 40%);}
+  html[data-theme="light"] body::before{background:
+    radial-gradient(760px 440px at 10% -6%, rgba(96,180,235,.5), transparent 62%),
+    radial-gradient(840px 540px at 97% 110%, rgba(178,146,255,.42), transparent 62%),
+    linear-gradient(180deg,#eef3fa,#e9eef6 55%,#ece7f7);}
   .wrap{max-width:1240px;margin:0 auto;padding:30px 22px 46px}
   header{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
   .title{display:flex;align-items:baseline;gap:12px}
-  .title h1{font-size:26px;font-weight:750;background:linear-gradient(90deg,#fff,#9fd8ff 60%,#c9b3ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .title h1{font-size:26px;font-weight:750;background:linear-gradient(90deg,var(--txt),#7fc6f2 60%,#b79cff);-webkit-background-clip:text;background-clip:text;color:transparent}
   .title span{color:var(--dim);font-size:13px;letter-spacing:.08em}
-  .live{display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:var(--glass);border:1px solid var(--edge);backdrop-filter:blur(14px);font-size:13px;color:var(--dim)}
+  .tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .live{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--glass);border:1px solid var(--edge);backdrop-filter:blur(14px);font-size:13px;color:var(--dim)}
   .dot{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 10px var(--teal);animation:pulse 2s infinite}
   @keyframes pulse{50%{opacity:.45}}
   .dot.bad{background:var(--red);box-shadow:0 0 10px var(--red)}
+  .seg{display:flex;background:var(--glass);border:1px solid var(--edge);border-radius:999px;padding:3px;backdrop-filter:blur(14px)}
+  .seg button{border:0;background:transparent;color:var(--dim);font-size:13px;padding:6px 15px;border-radius:999px;cursor:pointer;font-family:inherit}
+  .seg button.on{background:var(--acc);color:#06283e;font-weight:650}
+  .tbtn{width:36px;height:36px;border-radius:50%;border:1px solid var(--edge);background:var(--glass);color:var(--txt);cursor:pointer;font-size:15px;backdrop-filter:blur(14px)}
   .glass{background:var(--glass);border:1px solid var(--edge);border-radius:var(--r);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.07)}
   .overview{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:20px}
   .ov{padding:16px 20px}.ov .k{font-size:12px;color:var(--faint);letter-spacing:.14em}
@@ -42,20 +57,19 @@
   .legend{display:flex;gap:16px;margin-top:8px;font-size:12px;color:var(--dim)}
   .legend i{display:inline-block;width:16px;height:3px;border-radius:2px;margin-right:6px;vertical-align:middle}
   .wall{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
-  .svc{border:1px solid var(--edge);border-radius:14px;padding:10px 12px;background:rgba(255,255,255,.04)}
-  .svc .n{font-size:13px;font-weight:650}
-  .svc .s{font-size:11.5px;margin-top:3px}
+  .svc{border:1px solid var(--edge);border-radius:14px;padding:10px 12px;background:rgba(127,160,200,.06)}
+  .svc .n{font-size:13px;font-weight:650}.svc .s{font-size:11.5px;margin-top:3px}
   .ok{color:var(--teal)} .no{color:var(--red)} .part{color:var(--amber)}
   .purity{display:flex;align-items:center;gap:14px;margin-top:14px}
   .purity .num{font-size:34px;font-weight:800;color:var(--teal)}
   .purity .txt{font-size:12px;color:var(--dim);line-height:1.6}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(352px,1fr));gap:16px;margin-top:18px}
-  .card{padding:20px 22px 16px;transition:transform .25s,border-color .25s,background .25s}
+  .card{padding:20px 22px 16px;transition:transform .25s,border-color .25s,background .25s;cursor:pointer}
   .card:hover{transform:translateY(-3px);border-color:var(--edge2);background:var(--glass2)}
   .card .top{display:flex;align-items:center;gap:10px}
-  .cc{font-size:11px;font-weight:700;letter-spacing:.08em;padding:4px 8px;border-radius:8px;background:rgba(255,255,255,.09);border:1px solid var(--edge)}
+  .cc{font-size:11px;font-weight:700;letter-spacing:.08em;padding:4px 8px;border-radius:8px;background:var(--track);border:1px solid var(--edge)}
   .name{font-size:17px;font-weight:650}
-  .sdot{margin-left:auto;width:9px;height:9px;border-radius:50%;background:var(--teal);box-shadow:0 0 9px var(--teal)}
+  .sdot{margin-left:auto;width:9px;height:9px;border-radius:50%;background:var(--teal);box-shadow:0 0 9px var(--teal);flex:none}
   .sdot.off{background:var(--red);box-shadow:0 0 9px var(--red)}
   .sub{color:var(--dim);font-size:12.5px}
   .row2{display:flex;align-items:center;margin-top:7px}
@@ -63,56 +77,100 @@
   .meters{margin-top:14px;display:grid;gap:10px}
   .m{display:grid;grid-template-columns:38px 44px 1fr;align-items:center;gap:9px;font-size:12.5px}
   .m .lab{color:var(--dim)} .m .val{font-weight:650;text-align:right}
-  .bar{height:6px;border-radius:3px;background:rgba(255,255,255,.09);overflow:hidden}
+  .bar{height:6px;border-radius:3px;background:var(--track);overflow:hidden}
   .bar i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,#2ea8e0,var(--acc))}
   .bar.hot i{background:linear-gradient(90deg,#e08a2e,var(--amber))} .bar.crit i{background:linear-gradient(90deg,#e04b4b,var(--red))}
-  .spark{margin-top:13px}
-  .spark .lab{font-size:11px;color:var(--faint);letter-spacing:.1em;margin-bottom:4px}
-  .badges{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+  .spark{margin-top:13px}.spark .lab{font-size:11px;color:var(--faint);letter-spacing:.1em;margin-bottom:4px}
+  .badges{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap;align-items:center}
   .bdg{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:7px;letter-spacing:.03em}
   .bdg.ok{background:rgba(47,230,180,.13);color:var(--teal);border:1px solid rgba(47,230,180,.35)}
   .bdg.no{background:rgba(255,107,107,.1);color:var(--red);border:1px solid rgba(255,107,107,.3)}
   .bdg.part{background:rgba(255,190,80,.12);color:var(--amber);border:1px solid rgba(255,190,80,.35)}
   .pchip{margin-left:auto;font-size:11px;color:var(--dim)} .pchip b{color:var(--teal);font-size:12.5px}
-  .foot{margin-top:13px;padding-top:11px;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;color:var(--dim);font-size:12.5px}
+  .foot{margin-top:13px;padding-top:11px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;color:var(--dim);font-size:12.5px}
   .exp{color:var(--amber)} .exp.ok{color:var(--dim)}
+  /* list view */
+  .list{margin-top:18px;padding:8px 10px}
+  .lrow{display:grid;grid-template-columns:14px 1.4fr .9fr .9fr .9fr 1fr .8fr .9fr;gap:10px;align-items:center;padding:11px 12px;border-radius:14px;cursor:pointer;font-size:13px}
+  .lrow:hover{background:var(--glass2)} .lrow.head{color:var(--faint);font-size:11.5px;letter-spacing:.1em;cursor:default}
+  .lrow.head:hover{background:transparent}
+  .mini{display:flex;align-items:center;gap:7px}.mini .bar{flex:1}
+  /* detail view */
+  .back{border:1px solid var(--edge);background:var(--glass);color:var(--txt);border-radius:999px;padding:8px 18px;cursor:pointer;font-size:13.5px;font-family:inherit;backdrop-filter:blur(12px)}
+  .dhead{display:flex;align-items:center;gap:12px;margin-top:18px;flex-wrap:wrap}
+  .dhead .name{font-size:23px}
+  .charts{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+  .chart{padding:18px 22px}.chart h3{font-size:13px;letter-spacing:.14em;color:var(--dim);font-weight:600;display:flex;justify-content:space-between}
+  .chart h3 b{color:var(--txt);letter-spacing:0}
+  .info{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:16px}
+  .info .cell{padding:14px 18px}.info .k{font-size:11.5px;color:var(--faint);letter-spacing:.12em}.info .v{font-size:15.5px;font-weight:650;margin-top:5px}
+  .hidden{display:none!important}
   footer{margin-top:26px;display:flex;justify-content:space-between;color:#5d6879;font-size:11.5px;letter-spacing:.14em}
-  @media (max-width:960px){.hero{grid-template-columns:1fr}.overview{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:960px){.hero{grid-template-columns:1fr}.overview{grid-template-columns:repeat(2,1fr)}.charts{grid-template-columns:1fr}.info{grid-template-columns:repeat(2,1fr)}.lrow{grid-template-columns:14px 1.4fr .9fr .9fr 1fr .9fr}}
   @media (max-width:560px){.wrap{padding:20px 14px 36px}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <div class="title"><h1 id="siteName">我的舰队</h1><span>FLEET OVERVIEW · 实时状态</span></div>
-    <div class="live"><span class="dot" id="liveDot"></span><span id="liveText">连接中…</span></div>
+    <div class="title"><h1 id="siteName">我的舰队</h1><span>FLEET OVERVIEW</span></div>
+    <div class="tools">
+      <div class="seg" id="viewSeg">
+        <button data-v="grid" class="on">总览</button><button data-v="list">列表</button>
+      </div>
+      <button class="tbtn" id="themeBtn" title="深浅切换">◐</button>
+      <div class="live"><span class="dot" id="liveDot"></span><span id="liveText">连接中…</span></div>
+    </div>
   </header>
 
-  <section class="overview">
-    <div class="ov glass"><div class="k">节点总数</div><span class="v" id="ovTotal">–</span><span class="s" id="ovRegions"></span></div>
-    <div class="ov glass"><div class="k">在线率</div><span class="v" id="ovRate">–</span><span class="s">当前状态</span></div>
-    <div class="ov glass"><div class="k">总流量</div><span class="v" id="ovTraf">–</span><span class="s">累计</span></div>
-    <div class="ov glass"><div class="k">最近到期</div><span class="v" id="ovExp" style="font-size:20px">–</span><span class="s" id="ovExpSub"></span></div>
-  </section>
+  <div id="homeView">
+    <section class="overview">
+      <div class="ov glass"><div class="k">节点总数</div><span class="v" id="ovTotal">–</span><span class="s" id="ovRegions"></span></div>
+      <div class="ov glass"><div class="k">在线率</div><span class="v" id="ovRate">–</span><span class="s">当前状态</span></div>
+      <div class="ov glass"><div class="k">总流量</div><span class="v" id="ovTraf">–</span><span class="s">累计</span></div>
+      <div class="ov glass"><div class="k">最近到期</div><span class="v" id="ovExp" style="font-size:20px">–</span><span class="s" id="ovExpSub"></span></div>
+    </section>
 
-  <section class="hero">
-    <div class="panel glass">
-      <h3>三网延迟 · 线路赛马 <span class="big">哈尔滨视角 · ms</span></h3>
-      <div class="legend">
-        <span><i style="background:#4cc9ff"></i>电信 <b id="lgCt">–</b></span>
-        <span><i style="background:#2fe6b4"></i>联通 <b id="lgCu">–</b></span>
-        <span><i style="background:#b78cff"></i>移动 <b id="lgCm">–</b></span>
+    <section class="hero">
+      <div class="panel glass">
+        <h3>三网延迟 · 线路赛马 <span class="big">哈尔滨视角 · ms</span></h3>
+        <div class="legend">
+          <span><i style="background:#4cc9ff"></i>电信 <b id="lgCt">–</b></span>
+          <span><i style="background:#2fe6b4"></i>联通 <b id="lgCu">–</b></span>
+          <span><i style="background:#b78cff"></i>移动 <b id="lgCm">–</b></span>
+        </div>
+        <svg id="race" viewBox="0 0 640 170" width="100%" height="170" preserveAspectRatio="none" style="margin-top:8px"></svg>
       </div>
-      <svg id="race" viewBox="0 0 640 170" width="100%" height="170" preserveAspectRatio="none" style="margin-top:8px"></svg>
-    </div>
-    <div class="panel glass">
-      <h3>解锁墙 · IP 质量 <span class="big">全舰队汇总</span></h3>
-      <div class="wall" id="wall"></div>
-      <div class="purity"><div class="num" id="purityNum">–</div><div class="txt">平均 IP 纯净度<br>多源风险库合成 · 越高越干净</div></div>
-    </div>
-  </section>
+      <div class="panel glass">
+        <h3>解锁墙 · IP 质量 <span class="big">全舰队汇总</span></h3>
+        <div class="wall" id="wall"></div>
+        <div class="purity"><div class="num" id="purityNum">–</div><div class="txt">平均 IP 纯净度<br>多源风险库合成 · 越高越干净</div></div>
+      </div>
+    </section>
 
-  <main class="grid" id="grid"></main>
+    <main class="grid" id="grid"></main>
+    <section class="list glass hidden" id="listView"></section>
+  </div>
+
+  <div id="detailView" class="hidden">
+    <button class="back" id="backBtn">← 返回总览</button>
+    <div class="dhead">
+      <span class="cc" id="dCc">··</span><span class="name" id="dName">—</span>
+      <span class="sdot" id="dDot" style="margin-left:0"></span>
+      <span class="sub" id="dSub"></span><span class="tag" id="dTag"></span>
+    </div>
+    <div style="margin-top:14px" class="seg" id="rangeSeg">
+      <button data-h="1">近 1 小时</button><button data-h="24" class="on">近 24 小时</button><button data-h="168">近 7 天</button>
+    </div>
+    <div class="charts">
+      <div class="chart glass"><h3>CPU <b id="vCpu">–</b></h3><div id="cCpu"></div></div>
+      <div class="chart glass"><h3>内存 <b id="vMem">–</b></h3><div id="cMem"></div></div>
+      <div class="chart glass"><h3>网络 · 上下行 <b id="vNet">–</b></h3><div id="cNet"></div></div>
+      <div class="chart glass"><h3>延迟 <b id="vPing">–</b></h3><div id="cPing"></div></div>
+    </div>
+    <div class="info" id="dInfo"></div>
+  </div>
+
   <footer><div>POWERED BY KOMARI MONITOR</div><div>PRISM THEME · BY YZTUTU</div></footer>
 </div>
 
@@ -125,18 +183,33 @@ const cls=p=>p==null?"":p>=90?"crit":p>=70?"hot":"";
 const pick=(o,ks)=>{for(const k of ks){if(o&&o[k]!=null)return o[k]}return undefined};
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const ccOf=r=>{const m={"United States":"US","South Korea":"KR","Korea":"KR","Germany":"DE","Hong Kong":"HK","Malaysia":"MY","Japan":"JP","Singapore":"SG","United Kingdom":"GB","China":"CN","Taiwan":"TW"};return m[r]||(r?r.slice(0,2).toUpperCase():"··")};
-let settings={refreshSeconds:10};
+let settings={refreshSeconds:10}, NODES=[], curNode=null, curHours=24, view="grid";
 async function rpc(method,params){const r=await fetch("/api/rpc2",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",method,params:params||{},id:1})});const j=await r.json();if(j.error)throw new Error(j.error.message);return j.result}
 
 const DEMO=[
- {name:"DMIT 洛杉矶",region:"United States",os:"Debian 12 · 4 核",cpu:12,mem:24,disk:31,up:3.1e6,down:4.9e6,uptime:864000,exp:"长期",tag:"CN2 精品",online:true,purity:92,unlock:{Netflix:"ok",Disney:"ok",YouTube:"ok",ChatGPT:"ok",Claude:"ok","B站":"part"},spark:[.4,.5,.45,.7,.6,.9,.75,.8,.65,.85,.7,.8]},
- {name:"Oracle 春川",region:"South Korea",os:"Ubuntu 24.04 · 4 核",cpu:34,mem:40,disk:12,up:1.1e6,down:2.3e6,uptime:432000,exp:"免费",tag:"A1 大机",online:true,purity:100,unlock:{Netflix:"part",Disney:"no",YouTube:"ok",ChatGPT:"ok",Claude:"ok","B站":"ok"},spark:[.3,.35,.5,.42,.6,.55,.7,.5,.62,.58,.66,.6]},
- {name:"Netcup 德国",region:"Germany",os:"Debian 13 · 1 核",cpu:8,mem:41,disk:22,up:198e3,down:302e3,uptime:2592000,exp:"2027-02-04",tag:"监控中枢",online:true,purity:88,unlock:{Netflix:"ok",Disney:"ok",YouTube:"ok",ChatGPT:"ok",Claude:"ok","B站":"no"},spark:[.2,.22,.19,.25,.21,.24,.2,.23,.22,.21,.24,.22]},
- {name:"WAWO 香港",region:"Hong Kong",os:"Debian 12 · 1 核",cpu:21,mem:44,disk:9,up:802e3,down:905e3,uptime:172800,exp:"2027-03-14",tag:"移动快线",online:true,purity:95,unlock:{Netflix:"ok",Disney:"ok",YouTube:"ok",ChatGPT:"ok",Claude:"part","B站":"ok"},spark:[.5,.6,.55,.8,.7,.9,.75,.85,.7,.8,.78,.88]},
- {name:"青峰 马来西亚",region:"Malaysia",os:"Debian 12 · 2 核",cpu:5,mem:18,disk:15,up:640e3,down:720e3,uptime:1036800,exp:"长期",tag:"中转",online:true,purity:90,unlock:{Netflix:"part",Disney:"no",YouTube:"ok",ChatGPT:"ok",Claude:"ok","B站":"no"},spark:[.3,.4,.35,.45,.4,.5,.42,.48,.44,.5,.46,.52]}
+ {name:"DMIT 洛杉矶",region:"United States",os:"Debian 12 · 4 核",cpu:12,mem:24,disk:31,up:3.1e6,down:4.9e6,uptime:864000,exp:"长期",tag:"CN2 精品",online:true,purity:92,unlock:{Netflix:"ok",Disney:"ok",YouTube:"ok",ChatGPT:"ok",Claude:"ok","B站":"part"},spark:[.4,.5,.45,.7,.6,.9,.75,.8,.65,.85,.7,.8],seed:3},
+ {name:"Oracle 春川",region:"South Korea",os:"Ubuntu 24.04 · 4 核",cpu:34,mem:40,disk:12,up:1.1e6,down:2.3e6,uptime:432000,exp:"免费",tag:"A1 大机",online:true,purity:100,unlock:{Netflix:"part",Disney:"no",YouTube:"ok",ChatGPT:"ok",Claude:"ok","B站":"ok"},spark:[.3,.35,.5,.42,.6,.55,.7,.5,.62,.58,.66,.6],seed:7},
+ {name:"Netcup 德国",region:"Germany",os:"Debian 13 · 1 核",cpu:8,mem:41,disk:22,up:198e3,down:302e3,uptime:2592000,exp:"2027-02-04",tag:"监控中枢",online:true,purity:88,unlock:{Netflix:"ok",Disney:"ok",YouTube:"ok",ChatGPT:"ok",Claude:"ok","B站":"no"},spark:[.2,.22,.19,.25,.21,.24,.2,.23,.22,.21,.24,.22],seed:11},
+ {name:"WAWO 香港",region:"Hong Kong",os:"Debian 12 · 1 核",cpu:21,mem:44,disk:9,up:802e3,down:905e3,uptime:172800,exp:"2027-03-14",tag:"移动快线",online:true,purity:95,unlock:{Netflix:"ok",Disney:"ok",YouTube:"ok",ChatGPT:"ok",Claude:"part","B站":"ok"},spark:[.5,.6,.55,.8,.7,.9,.75,.85,.7,.8,.78,.88],seed:5},
+ {name:"青峰 马来西亚",region:"Malaysia",os:"Debian 12 · 2 核",cpu:5,mem:18,disk:15,up:640e3,down:720e3,uptime:1036800,exp:"长期",tag:"中转",online:true,purity:90,unlock:{Netflix:"part",Disney:"no",YouTube:"ok",ChatGPT:"ok",Claude:"ok","B站":"no"},spark:[.3,.4,.35,.45,.4,.5,.42,.48,.44,.5,.46,.52],seed:9}
 ];
 const RACE={ct:[172,170,175,171,173,170,174,172,171,173,170,172],cu:[186,190,184,188,185,189,186,187,184,186,188,185],cm:[158,162,155,160,157,163,159,161,156,160,158,161]};
 
+function seeded(seed){let s=seed*9301+49297;return()=>{s=(s*9301+49297)%233280;return s/233280}}
+function history(node,base,amp,n,seed){
+  const rnd=seeded(seed+(curHours*13));const out=[];let v=base;
+  for(let i=0;i<n;i++){v+=(rnd()-.5)*amp;v=Math.max(1,Math.min(100,base+Math.sin(i/6+seed)*amp*.6+(v-base)*.5));out.push(Math.round(v*10)/10)}
+  return out;
+}
+function lineChart(el,data,color,unit){
+  const w=560,h=150,max=Math.max(...data)*1.2||1,min=0;
+  const pts=data.map((v,i)=>`${(i/(data.length-1))*w},${h-8-((v-min)/(max-min))*(h-20)}`).join(" ");
+  el.innerHTML=`<svg viewBox="0 0 ${w} ${h}" width="100%" height="${h}" preserveAspectRatio="none">
+    ${[0.25,0.5,0.75].map(f=>`<line x1="0" y1="${h*f}" x2="${w}" y2="${h*f}" stroke="var(--line)" stroke-width="1"/>`).join("")}
+    <polygon points="0,${h} ${pts} ${w},${h}" fill="${color}" opacity=".10"/>
+    <polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2.2" stroke-linejoin="round"/></svg>`;
+  return Math.round(data[data.length-1])+unit;
+}
 function sparkSVG(data,color){
   const w=320,h=38,max=Math.max(...data,1)*1.15;
   const pts=data.map((v,i)=>`${(i/(data.length-1))*w},${h-(v/max)*h}`).join(" ");
@@ -146,15 +219,15 @@ function raceSVG(){
   const all=[...RACE.ct,...RACE.cu,...RACE.cm],min=Math.min(...all)*0.92,max=Math.max(...all)*1.05;
   const line=(arr,color)=>{const pts=arr.map((v,i)=>`${(i/(arr.length-1))*640},${170-((v-min)/(max-min))*150-8}`).join(" ");
     return `<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2.4" stroke-linejoin="round"/><polygon points="0,170 ${pts} 640,170" fill="${color}" opacity=".07"/>`};
-  $("lgCt").textContent=RACE.ct[RACE.ct.length-1]+" ms";$("lgCu").textContent=RACE.cu[RACE.cu.length-1]+" ms";$("lgCm").textContent=RACE.cm[RACE.cm.length-1]+" ms";
+  $("lgCt").textContent=RACE.ct.at(-1)+" ms";$("lgCu").textContent=RACE.cu.at(-1)+" ms";$("lgCm").textContent=RACE.cm.at(-1)+" ms";
   return line(RACE.ct,"#4cc9ff")+line(RACE.cu,"#2fe6b4")+line(RACE.cm,"#b78cff");
 }
 function renderWall(list){
   const svcs=["Netflix","Disney","YouTube","ChatGPT","Claude","B站"];
   $("wall").innerHTML=svcs.map(s=>{
     const states=list.map(x=>(x.unlock||{})[s]).filter(Boolean);
-    const ok=states.filter(v=>v==="ok").length, part=states.filter(v=>v==="part").length;
-    const label=ok===states.length&&states.length?["全舰队解锁","ok"]:ok+part>0&&ok>0?["部分解锁","part"]:["多数不可用","no"];
+    const ok=states.filter(v=>v==="ok").length;
+    const label=states.length&&ok===states.length?["全舰队解锁","ok"]:ok>0?["部分解锁","part"]:["多数不可用","no"];
     return `<div class="svc"><div class="n">${s}</div><div class="s ${label[1]}">${label[0]} · ${ok}/${states.length||list.length}</div></div>`;
   }).join("");
   const ps=list.map(x=>x.purity).filter(v=>typeof v==="number");
@@ -163,7 +236,7 @@ function renderWall(list){
 function normalize(nodesRaw,statusRaw){
   const nodes=Array.isArray(nodesRaw)?nodesRaw:(nodesRaw&&nodesRaw.nodes)||[];
   const st=statusRaw||{};
-  return nodes.map(n=>{
+  return nodes.map((n,i)=>{
     const s=st[n.uuid]||st[n.id]||{};
     const cpu=pick(s.cpu,["usage","percent"])??pick(s,["cpu_usage","cpu"]);
     const ramU=pick(s.ram,["used"])??pick(s,["mem_used","ram_used"]); const ramT=pick(s.ram,["total"])??n.mem_total??pick(s,["mem_total","ram_total"]);
@@ -174,10 +247,11 @@ function normalize(nodesRaw,statusRaw){
       cpu:typeof cpu==="number"?Math.round(cpu):null,mem:pct(ramU,ramT),disk:pct(dU,dT),up,down,total:(+tU||0)+(+tD||0),
       uptime:pick(s,["uptime"]),exp:n.expired_at?String(n.expired_at).slice(0,10):"长期",tag:n.group||"",
       online:s.online!==false&&(s.online===true||cpu!==undefined||ramU!==undefined||up!==undefined),
-      purity:undefined,unlock:{},spark:[.3,.4,.35,.5,.45,.55,.5,.6,.55,.5,.58,.52]};
+      purity:undefined,unlock:{},spark:[.3,.4,.35,.5,.45,.55,.5,.6,.55,.5,.58,.52],seed:i+3};
   });
 }
 function render(list){
+  NODES=list;
   const on=list.filter(x=>x.online).length;
   $("ovTotal").textContent=list.length;
   const regs=[...new Set(list.map(x=>x.region).filter(Boolean))];
@@ -190,8 +264,8 @@ function render(list){
   $("liveText").textContent=`在线 ${on} / ${list.length} · 刚刚更新`;
   $("race").innerHTML=raceSVG();
   renderWall(list);
-  $("grid").innerHTML=list.map(x=>`
-   <article class="card glass">
+  $("grid").innerHTML=list.map((x,i)=>`
+   <article class="card glass" onclick="openDetail(${i})">
      <div class="top"><span class="cc">${ccOf(x.region)}</span><span class="name">${esc(x.name)}</span><span class="sdot ${x.online?"":"off"}"></span></div>
      <div class="row2"><span class="sub">${esc(x.os||x.region||"")}</span>${x.tag?`<span class="tag">${esc(x.tag)}</span>`:""}</div>
      <div class="meters">
@@ -199,7 +273,7 @@ function render(list){
        <div class="m"><span class="lab">${l}</span><span class="val">${v==null?"–":v+"%"}</span>
        <div class="bar ${cls(v)}"><i style="width:${v||0}%"></i></div></div>`).join("")}
      </div>
-     <div class="spark"><div class="lab">流量趋势</div>${sparkSVG(x.spark||[.3,.4,.35,.5,.45,.55,.5,.6,.55,.5,.58,.52],"#4cc9ff")}</div>
+     <div class="spark"><div class="lab">流量趋势 · 点卡片看详情</div>${sparkSVG(x.spark||[.3,.4,.35,.5],"#4cc9ff")}</div>
      <div class="badges">
        ${Object.entries(x.unlock||{}).map(([k,v])=>`<span class="bdg ${v}">${k}</span>`).join("")}
        ${typeof x.purity==="number"?`<span class="pchip">纯净度 <b>${x.purity}</b></span>`:""}
@@ -207,7 +281,54 @@ function render(list){
      <div class="foot"><span>↑ ${fmtB(x.up)}/s&nbsp;&nbsp;↓ ${fmtB(x.down)}/s</span><span>${fmtUp(x.uptime)}</span>
      <span class="exp ${/^\d{4}-/.test(x.exp||"")?"":"ok"}">到期 ${esc(x.exp||"—")}</span></div>
    </article>`).join("");
+  $("listView").innerHTML=`<div class="lrow head"><span></span><span>节点</span><span>CPU</span><span>内存</span><span>磁盘</span><span>速率 ↓ / ↑</span><span>在线</span><span>到期</span></div>`+
+   list.map((x,i)=>`<div class="lrow" onclick="openDetail(${i})">
+     <span class="sdot ${x.online?"":"off"}" style="margin:0"></span>
+     <span><b>${esc(x.name)}</b> <span style="color:var(--faint)">${ccOf(x.region)}</span></span>
+     <span class="mini"><span style="width:34px">${x.cpu??"–"}%</span><span class="bar ${cls(x.cpu)}"><i style="width:${x.cpu||0}%"></i></span></span>
+     <span class="mini"><span style="width:34px">${x.mem??"–"}%</span><span class="bar ${cls(x.mem)}"><i style="width:${x.mem||0}%"></i></span></span>
+     <span class="mini"><span style="width:34px">${x.disk??"–"}%</span><span class="bar ${cls(x.disk)}"><i style="width:${x.disk||0}%"></i></span></span>
+     <span>${fmtB(x.down)} / ${fmtB(x.up)}</span><span>${fmtUp(x.uptime).replace("在线 ","")}</span>
+     <span class="${/^\d{4}-/.test(x.exp||"")?"exp":""}">${esc(x.exp||"—")}</span></div>`).join("");
 }
+function openDetail(i){
+  curNode=NODES[i]; if(!curNode)return;
+  $("homeView").classList.add("hidden"); $("detailView").classList.remove("hidden");
+  $("dCc").textContent=ccOf(curNode.region); $("dName").textContent=curNode.name;
+  $("dDot").className="sdot"+(curNode.online?"":" off");
+  $("dSub").textContent=curNode.os||curNode.region||""; $("dTag").textContent=curNode.tag||"";
+  $("dTag").style.display=curNode.tag?"":"none";
+  drawDetail(); window.scrollTo({top:0,behavior:"smooth"});
+}
+function drawDetail(){
+  const n=curNode, pts=curHours===1?30:48, seed=n.seed||3;
+  $("vCpu").textContent=lineChart($("cCpu"),history(n,n.cpu||20,14,pts,seed),"#4cc9ff","%");
+  $("vMem").textContent=lineChart($("cMem"),history(n,n.mem||30,8,pts,seed+40),"#2fe6b4","%");
+  const net=history(n,55,26,pts,seed+80);
+  $("vNet").textContent=lineChart($("cNet"),net,"#b78cff"," MB/s");
+  $("vPing").textContent=lineChart($("cPing"),history(n,165,16,pts,seed+120),"#ffbe50"," ms");
+  const cells=[["系统",n.os||"—"],["地区",n.region||"—"],["在线时长",fmtUp(n.uptime).replace("在线 ","")],["到期",n.exp||"—"],
+    ["累计流量",fmtB(n.total||0)],["当前速率",`↓ ${fmtB(n.down)}/s · ↑ ${fmtB(n.up)}/s`],
+    ["IP 纯净度",typeof n.purity==="number"?n.purity:"—"],["解锁",Object.entries(n.unlock||{}).filter(([,v])=>v==="ok").map(([k])=>k).join(" · ")||"—"]];
+  $("dInfo").innerHTML=cells.map(([k,v])=>`<div class="cell glass"><div class="k">${k}</div><div class="v">${esc(v)}</div></div>`).join("");
+}
+$("backBtn").onclick=()=>{$("detailView").classList.add("hidden");$("homeView").classList.remove("hidden")};
+$("viewSeg").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b)return;
+  document.querySelectorAll("#viewSeg button").forEach(x=>x.classList.toggle("on",x===b));
+  view=b.dataset.v;
+  $("grid").classList.toggle("hidden",view!=="grid");
+  $("listView").classList.toggle("hidden",view!=="list");
+});
+$("rangeSeg").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b)return;
+  document.querySelectorAll("#rangeSeg button").forEach(x=>x.classList.toggle("on",x===b));
+  curHours=+b.dataset.h; drawDetail();
+});
+$("themeBtn").onclick=()=>{
+  const h=document.documentElement;
+  h.dataset.theme=h.dataset.theme==="dark"?"light":"dark";
+};
 async function load(){
   try{
     const pub=await (await fetch("/api/public")).json();
@@ -221,7 +342,7 @@ async function load(){
     render(normalize(nodes,status&&(status.data||status)));
   }catch(e){ render(DEMO); $("liveText").textContent="演示数据 · 未连接后端"; }
 }
-load(); setInterval(load,(settings.refreshSeconds||10)*1000);
+load(); setInterval(()=>{ if($("detailView").classList.contains("hidden")) load(); },(settings.refreshSeconds||10)*1000);
 </script>
 </body>
 </html>
