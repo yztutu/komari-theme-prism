@@ -1,0 +1,18 @@
+{
+  "name": { "zh-CN": "棱镜 · Prism", "en": "Prism" },
+  "short": "prism",
+  "description": {
+    "zh-CN": "站在 Komari Next 与 PurCarte 肩膀上的磨砂玻璃主题：极光底、总览大盘（含最近到期）、可扩展节点卡片网格。灵感来源 Komari Next（MIT）与 PurCarte（MIT），代码为原创实现。",
+    "en": "A frosted-glass Komari theme standing on the shoulders of Komari Next and PurCarte (both MIT; original code): aurora backdrop, overview strip with nearest expiry, and a node card grid that scales to any fleet size."
+  },
+  "version": "1.0.0",
+  "author": "yztutu",
+  "url": "https://github.com/yztutu/komari-theme-prism",
+  "preview": "preview.png",
+  "configuration": {
+    "type": "managed",
+    "data": [
+      { "key": "refreshSeconds", "type": "number", "name": { "zh-CN": "刷新间隔（秒）", "en": "Refresh interval (s)" }, "default": 10 }
+    ]
+  }
+}
