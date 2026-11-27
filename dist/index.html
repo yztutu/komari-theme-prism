@@ -133,6 +133,38 @@
   .chart h3 b{color:var(--txt);letter-spacing:0}
   .info{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:16px}
   .info .cell{padding:14px 18px}.info .k{font-size:11.5px;color:var(--faint);letter-spacing:.12em}.info .v{font-size:15.5px;font-weight:650;margin-top:5px}
+  .navtabs{display:flex;gap:4px;margin-left:18px}
+  .navtabs button{border:0;background:transparent;color:var(--dim);font-size:14px;padding:8px 13px;cursor:pointer;font-family:inherit;border-bottom:2px solid transparent}
+  .navtabs button.on{color:var(--txt);border-bottom-color:var(--acc);font-weight:650}
+  .hero{margin-top:22px;padding:38px 40px;position:relative;overflow:hidden}
+  .hero .en{font-size:11px;letter-spacing:.3em;color:var(--acc);font-weight:600}
+  .hero h2{font-size:64px;font-weight:850;letter-spacing:.01em;line-height:1.08;margin-top:12px}
+  .hero .poem{font-size:19px;letter-spacing:.42em;color:var(--gold);margin-top:12px;font-weight:600}
+  .hero .desc{color:var(--dim);font-size:14px;margin-top:14px;max-width:560px;line-height:1.8}
+  .hero .chips{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+  .hchip{border:1px solid var(--edge2);border-radius:9px;padding:7px 14px;font-size:12.5px;color:var(--dim);background:rgba(127,160,200,.05)}
+  .hchip b{color:var(--txt)}
+  .orbit{position:absolute;right:-70px;top:50%;transform:translateY(-50%);opacity:.55;pointer-events:none}
+  .strip{display:grid;grid-template-columns:repeat(4,1fr);margin-top:16px;padding:6px 10px}
+  .strip .cell{padding:16px 22px 13px;border-left:1px solid var(--line);position:relative}
+  .strip .cell:first-child{border-left:0}
+  .strip .v{font-size:38px;font-weight:800;font-variant-numeric:tabular-nums}
+  .strip .k{font-size:12px;color:var(--faint);letter-spacing:.18em;margin-top:4px}
+  .strip .cell::after{content:"";position:absolute;left:22px;bottom:0;height:2px;width:44px;background:var(--acc)}
+  .strip .cell:nth-child(2)::after{background:var(--teal)} .strip .cell:nth-child(3)::after{background:var(--violet)} .strip .cell:nth-child(4)::after{background:var(--gold)}
+  .sechead{display:flex;align-items:flex-end;gap:14px;margin-top:30px;flex-wrap:wrap}
+  .sechead h3{font-size:27px;font-weight:800}
+  .sechead .cnt{color:var(--faint);font-size:12.5px;padding-bottom:5px}
+  .sechead .right{margin-left:auto;display:flex;gap:8px;align-items:center}
+  .search{background:var(--track);border:1px solid var(--edge);border-radius:11px;padding:9px 14px;color:var(--txt);font-size:13px;width:190px;font-family:inherit;outline:none}
+  .search:focus{border-color:var(--acc)}
+  .dbtn{width:34px;height:34px;border-radius:10px;border:1px solid var(--edge);background:var(--track);color:var(--dim);cursor:pointer;font-size:13px}
+  .dbtn.on{color:var(--txt);border-color:var(--acc)}
+  .brow{display:grid;grid-template-columns:1.3fr .8fr .8fr .9fr 1.2fr .9fr;gap:12px;align-items:center;padding:14px 16px;border-radius:14px;font-size:13.5px}
+  .brow:hover{background:var(--glass2)} .brow.head{color:var(--faint);font-size:11.5px;letter-spacing:.12em}
+  .brow.head:hover{background:transparent}
+  .daysbar{height:6px;border-radius:3px;background:var(--track);overflow:hidden;margin-top:5px}
+  .daysbar i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--acc))}
   .hidden{display:none!important}
   footer{margin-top:28px;display:flex;justify-content:space-between;color:#5d6879;font-size:11.5px;letter-spacing:.14em;flex-wrap:wrap;gap:8px}
   @keyframes dashmove{to{stroke-dashoffset:-26}}
@@ -149,6 +181,7 @@
   <div class="toolbar glass">
     <div class="avatar" id="avatarTx">舰</div>
     <div class="brand"><div class="n" id="siteName">我的舰队</div><div class="s">MONITORING STATION</div></div>
+    <div class="navtabs" id="navTabs"><button data-p="home" class="on">概览</button><button data-p="bill">账单</button></div>
     <div class="tools">
       <div class="seg" id="viewSeg"><button data-v="grid" class="on">总览</button><button data-v="list">列表</button></div>
       <button class="tbtn" id="themeBtn" title="深浅切换">◐</button>
@@ -158,36 +191,33 @@
   </div>
 
   <div id="homeView">
-    <div class="headline">
-      <div><h2>服务器状态</h2><p>全球节点实时监测 · 延迟、解锁与负载一屏尽览</p></div>
-      <div class="live"><span class="dot" id="liveDot"></span><span id="liveText">连接中…</span></div>
-    </div>
+    <section class="hero glass">
+      <svg class="orbit" width="430" height="430" viewBox="0 0 430 430" fill="none">
+        <circle cx="215" cy="215" r="70" stroke="var(--acc)" stroke-width="1" opacity=".5"/>
+        <circle cx="215" cy="215" r="128" stroke="var(--violet)" stroke-width="1" opacity=".4"/>
+        <circle cx="215" cy="215" r="188" stroke="var(--acc)" stroke-width="1" opacity=".28"/>
+        <circle cx="343" cy="215" r="5" fill="var(--teal)"/><circle cx="215" cy="27" r="4" fill="var(--gold)"/>
+        <circle cx="145" cy="215" r="3.4" fill="var(--acc)"/>
+        <path d="M215 5v26M215 399v26M5 215h26M399 215h26" stroke="var(--faint)" stroke-width="1" opacity=".7"/>
+        <circle cx="215" cy="215" r="3" fill="var(--txt)"/>
+      </svg>
+      <div class="en">FLEET OBSERVATORY · 01</div>
+      <h2 id="heroName">我的舰队</h2>
+      <div class="poem">星 辰 大 海 · 皆 在 掌 控</div>
+      <p class="desc">全球节点实时观测界面——延迟、负载、解锁与账单，收束于一屏。</p>
+      <div class="chips">
+        <span class="hchip">在线 <b id="hOn">–</b></span>
+        <span class="hchip">累计传输 <b id="hTraf">–</b></span>
+        <span class="hchip">最近到期 <b id="hExp">–</b></span>
+        <span class="hchip">实时拓扑信号 <b style="color:var(--teal)">●</b></span>
+      </div>
+    </section>
 
-    <section class="stats">
-      <div class="stat glass">
-        <div class="lab">节点状态<span class="ichip" style="background:rgba(255,120,120,.14);color:#ff8a8a">♥</span></div>
-        <div class="big"><span id="stOn">–</span><small> / <span id="stTotal">–</span></small><span class="chip ok" id="stChip">—</span></div>
-        <div class="sub" id="stSub">—</div>
-        <div class="spark" id="stSpark"></div>
-      </div>
-      <div class="stat glass">
-        <div class="lab">平均 CPU<span class="ichip" style="background:rgba(183,140,255,.14);color:#c4a6ff">⌘</span></div>
-        <div class="big" style="color:var(--teal)"><span id="stCpu">–</span><small>%</small></div>
-        <div class="sub">在线节点的平均使用率</div>
-        <div class="spark" id="cpuSpark"></div>
-      </div>
-      <div class="stat glass">
-        <div class="lab">内存使用<span class="ichip" style="background:rgba(76,201,255,.13);color:#7fd0ff">▤</span></div>
-        <div class="big" style="color:var(--teal)"><span id="stMem">–</span><small>%</small></div>
-        <div class="sub" id="stMemSub">—</div>
-        <div class="spark" id="memSpark"></div>
-      </div>
-      <div class="stat glass">
-        <div class="lab">覆盖地区<span class="ichip" style="background:rgba(255,190,80,.13);color:#ffd28a">◎</span></div>
-        <div class="big"><span id="stReg">–</span><small> 个地区</small></div>
-        <div class="sub" id="stRegSub">—</div>
-        <div class="spark" id="regDots" style="font-size:12px;color:var(--acc)"></div>
-      </div>
+    <section class="strip glass">
+      <div class="cell"><div class="v" id="stOn2">–</div><div class="k">在线节点</div></div>
+      <div class="cell"><div class="v" id="stReg2">–</div><div class="k">覆盖地区</div></div>
+      <div class="cell"><div class="v" id="stTraf2">–</div><div class="k">累计传输</div></div>
+      <div class="cell"><div class="v" id="stClock2" style="font-size:31px;padding-top:5px">–</div><div class="k">最后同步</div></div>
     </section>
 
     <section class="split">
@@ -219,6 +249,15 @@
       <div class="wall" id="wall"></div>
     </section>
 
+    <div class="sechead">
+      <h3>节点阵列</h3><span class="cnt" id="nodeCnt"></span>
+      <div class="right">
+        <button class="dbtn" data-cols="2" title="双列">▦</button>
+        <button class="dbtn on" data-cols="3" title="三列">▤</button>
+        <button class="dbtn" data-cols="4" title="四列">▥</button>
+        <input class="search" id="searchBox" placeholder="搜索节点…">
+      </div>
+    </div>
     <main class="grid" id="grid"></main>
     <section class="list glass hidden" id="listView"></section>
   </div>
@@ -240,6 +279,17 @@
       <div class="chart glass"><h3>延迟 <b id="vPing">–</b></h3><div id="cPing"></div></div>
     </div>
     <div class="info" id="dInfo"></div>
+  </div>
+
+  <div id="billView" class="hidden">
+    <div class="sechead"><h3>账单总览</h3><span class="cnt">每台机器的身价与余生</span></div>
+    <section class="strip glass" style="margin-top:16px">
+      <div class="cell"><div class="v" id="bMonth">–</div><div class="k">月均支出</div></div>
+      <div class="cell"><div class="v" id="bYear">–</div><div class="k">年化总计</div></div>
+      <div class="cell"><div class="v" id="bSoon">–</div><div class="k">30 天内到期</div></div>
+      <div class="cell"><div class="v" id="bValue">–</div><div class="k">剩余价值合计</div></div>
+    </section>
+    <section class="list glass" id="billList" style="margin-top:18px"></section>
   </div>
 
   <footer><div>POWERED BY KOMARI MONITOR</div><div id="footUpd">—</div><div>PRISM THEME · BY YZTUTU</div></footer>
@@ -299,11 +349,11 @@ let settings={refreshSeconds:10}, NODES=[], curNode=null, curHours=24, DEMO_MODE
 async function rpc(method,params){const r=await fetch("/api/rpc2",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",method,params:params||{},id:1})});const j=await r.json();if(j.error)throw new Error(j.error.message);return j.result}
 
 const DEMO=[
- {name:"DMIT 洛杉矶",region:"United States",os:"Debian 12 · 4 核",cpu:12,mem:24,disk:31,up:3.1e6,down:4.9e6,uptime:864000,exp:"长期",tag:"CN2 精品",online:true,purity:92,memU:3.8,memT:16,unlock:{Netflix:"ok",Disney:"ok",YouTube:"ok",ChatGPT:"ok",Claude:"ok","B站":"part"},spark:[.4,.5,.45,.7,.6,.9,.75,.8,.65,.85,.7,.8],seed:3},
- {name:"Oracle 春川",region:"South Korea",os:"Ubuntu 24.04 · 4 核",cpu:34,mem:40,disk:12,up:1.1e6,down:2.3e6,uptime:432000,exp:"免费",tag:"A1 大机",online:true,purity:100,memU:9.6,memT:24,unlock:{Netflix:"part",Disney:"no",YouTube:"ok",ChatGPT:"ok",Claude:"ok","B站":"ok"},spark:[.3,.35,.5,.42,.6,.55,.7,.5,.62,.58,.66,.6],seed:7},
- {name:"Netcup 德国",region:"Germany",os:"Debian 13 · 1 核",cpu:8,mem:41,disk:22,up:198e3,down:302e3,uptime:2592000,exp:"2027-02-04",tag:"监控中枢",online:true,purity:88,memU:0.41,memT:1,unlock:{Netflix:"ok",Disney:"ok",YouTube:"ok",ChatGPT:"ok",Claude:"ok","B站":"no"},spark:[.2,.22,.19,.25,.21,.24,.2,.23,.22,.21,.24,.22],seed:11},
- {name:"WAWO 香港",region:"Hong Kong",os:"Debian 12 · 1 核",cpu:21,mem:44,disk:9,up:802e3,down:905e3,uptime:172800,exp:"2027-03-14",tag:"移动快线",online:true,purity:95,memU:0.22,memT:0.5,unlock:{Netflix:"ok",Disney:"ok",YouTube:"ok",ChatGPT:"ok",Claude:"part","B站":"ok"},spark:[.5,.6,.55,.8,.7,.9,.75,.85,.7,.8,.78,.88],seed:5},
- {name:"青峰 马来西亚",region:"Malaysia",os:"Debian 12 · 2 核",cpu:5,mem:18,disk:15,up:640e3,down:720e3,uptime:1036800,exp:"长期",tag:"中转",online:true,purity:90,memU:0.36,memT:2,unlock:{Netflix:"part",Disney:"no",YouTube:"ok",ChatGPT:"ok",Claude:"ok","B站":"no"},spark:[.3,.4,.35,.45,.4,.5,.42,.48,.44,.5,.46,.52],seed:9}
+ {name:"DMIT 洛杉矶",region:"United States",os:"Debian 12 · 4 核",cpu:12,mem:24,disk:31,up:3.1e6,down:4.9e6,uptime:864000,exp:"2027-11-06",price:420,cycle:365,cur:"¥",tag:"CN2 精品",online:true,purity:92,memU:3.8,memT:16,unlock:{Netflix:"ok",Disney:"ok",YouTube:"ok",ChatGPT:"ok",Claude:"ok","B站":"part"},spark:[.4,.5,.45,.7,.6,.9,.75,.8,.65,.85,.7,.8],seed:3},
+ {name:"Oracle 春川",region:"South Korea",os:"Ubuntu 24.04 · 4 核",cpu:34,mem:40,disk:12,up:1.1e6,down:2.3e6,uptime:432000,exp:"免费",price:0,cycle:365,cur:"¥",tag:"A1 大机",online:true,purity:100,memU:9.6,memT:24,unlock:{Netflix:"part",Disney:"no",YouTube:"ok",ChatGPT:"ok",Claude:"ok","B站":"ok"},spark:[.3,.35,.5,.42,.6,.55,.7,.5,.62,.58,.66,.6],seed:7},
+ {name:"Netcup 德国",region:"Germany",os:"Debian 13 · 1 核",cpu:8,mem:41,disk:22,up:198e3,down:302e3,uptime:2592000,exp:"2027-02-04",price:16.08,cycle:90,cur:"€",tag:"监控中枢",online:true,purity:88,memU:0.41,memT:1,unlock:{Netflix:"ok",Disney:"ok",YouTube:"ok",ChatGPT:"ok",Claude:"ok","B站":"no"},spark:[.2,.22,.19,.25,.21,.24,.2,.23,.22,.21,.24,.22],seed:11},
+ {name:"WAWO 香港",region:"Hong Kong",os:"Debian 12 · 1 核",cpu:21,mem:44,disk:9,up:802e3,down:905e3,uptime:172800,exp:"2027-03-14",price:31,cycle:365,cur:"¥",tag:"移动快线",online:true,purity:95,memU:0.22,memT:0.5,unlock:{Netflix:"ok",Disney:"ok",YouTube:"ok",ChatGPT:"ok",Claude:"part","B站":"ok"},spark:[.5,.6,.55,.8,.7,.9,.75,.85,.7,.8,.78,.88],seed:5},
+ {name:"青峰 马来西亚",region:"Malaysia",os:"Debian 12 · 2 核",cpu:5,mem:18,disk:15,up:640e3,down:720e3,uptime:1036800,exp:"2027-10-29",price:180,cycle:365,cur:"¥",tag:"中转",online:true,purity:90,memU:0.36,memT:2,unlock:{Netflix:"part",Disney:"no",YouTube:"ok",ChatGPT:"ok",Claude:"ok","B站":"no"},spark:[.3,.4,.35,.45,.4,.5,.42,.48,.44,.5,.46,.52],seed:9}
 ];
 const RACE={ct:172,cu:186,cm:159};
 
@@ -357,24 +407,17 @@ function drawNet(){
 /* stats + wall */
 function renderStats(list){
   const on=list.filter(x=>x.online);
-  $("stOn").textContent=on.length; $("stTotal").textContent=list.length;
-  const chip=$("stChip");
-  if(on.length===list.length){chip.textContent="全部在线";chip.className="chip ok"}else{chip.textContent="部分离线";chip.className="chip warn"}
-  $("stSub").textContent=`${on.length} 在线 · ${list.length-on.length} 离线 · 上报心跳 3 秒前`;
-  tinyLine($("stSpark"),history({},92,7,26,5),"#ff8a8a");
-  const cpus=on.map(x=>x.cpu).filter(v=>typeof v==="number");
-  const avgCpu=cpus.length?Math.round(cpus.reduce((a,b)=>a+b,0)/cpus.length):null;
-  $("stCpu").textContent=avgCpu??"–";
-  tinyLine($("cpuSpark"),history({},avgCpu||16,9,26,9),"#b78cff");
-  const mU=list.reduce((a,x)=>a+(x.memU||0),0), mT=list.reduce((a,x)=>a+(x.memT||0),0);
-  $("stMem").textContent=mT?pct(mU*1e9,mT*1e9):"–";
-  $("stMemSub").textContent=mT?`${mU.toFixed(1)} GB / ${mT.toFixed(1)} GB · 在线节点`:"—";
-  $("memSpark").innerHTML=`<div class="bar" style="height:8px"><i style="width:${mT?pct(mU*1e9,mT*1e9):0}%"></i></div>`;
+  $("hOn").textContent=`${on.length} / ${list.length}`;
+  const traf=list.reduce((a,x)=>a+(x.total||0),0);
+  $("hTraf").textContent=fmtB(traf);
+  const dated=list.filter(x=>x.exp&&/^\d{4}-/.test(x.exp)).sort((a,b)=>a.exp<b.exp?-1:1)[0];
+  $("hExp").textContent=dated?`${dated.name} · ${dated.exp}`:"无";
+  $("stOn2").textContent=on.length;
   const regs=[...new Set(list.map(x=>x.region).filter(Boolean))];
-  $("stReg").textContent=regs.length;
-  $("stRegSub").textContent=regs.map(cnOf).join(" · ");
-  $("regDots").innerHTML=regs.map(()=>`<span style="margin-right:5px">●</span>`).join("")+`<span style="color:var(--faint)">${regs.length} 个地区当前已点亮</span>`;
+  $("stReg2").textContent=regs.length;
+  $("stTraf2").textContent=fmtB(traf);
   $("lgCt").textContent=RACE.ct+" ms"; $("lgCu").textContent=RACE.cu+" ms"; $("lgCm").textContent=RACE.cm+" ms";
+  $("nodeCnt").textContent=`${on.length} / ${list.length} 可见`;
 }
 function renderWall(list){
   const svcs=["Netflix","Disney","YouTube","ChatGPT","Claude","B站"];
@@ -402,7 +445,7 @@ function normalize(nodesRaw,statusRaw){
       memU:ramU?ramU/1e9:0,memT:ramT?ramT/1e9:0,
       uptime:pick(s,["uptime"]),exp:n.expired_at?String(n.expired_at).slice(0,10):"长期",tag:n.group||"",
       online:s.online!==false&&(s.online===true||cpu!==undefined||ramU!==undefined||up!==undefined),
-      purity:undefined,unlock:{},spark:[.3,.4,.35,.5,.45,.55,.5,.6,.55,.5,.58,.52],seed:i+3};
+      purity:undefined,unlock:{},price:pick(n,["price"])??undefined,cycle:pick(n,["billing_cycle","cycle"])||365,cur:pick(n,["currency"])||"¥",spark:[.3,.4,.35,.5,.45,.55,.5,.6,.55,.5,.58,.52],seed:i+3};
   });
 }
 function render(list){
@@ -411,9 +454,14 @@ function render(list){
   $("liveDot").className="dot"+(on<list.length?" bad":"");
   $("liveText").textContent=`实时同步 · 在线 ${on} / ${list.length}`;
   $("footUpd").textContent="更新于 "+new Date().toLocaleTimeString("zh-CN",{hour12:false});
-  renderStats(list); drawGlobe(list); renderWall(list);
+  renderStats(list); drawGlobe(list); renderWall(list); renderNodes(list); renderBill(list);
   netPush(list.reduce((a,x)=>a+(+x.up||0),0), list.reduce((a,x)=>a+(+x.down||0),0));
-  $("grid").innerHTML=list.map((x,i)=>`
+  window._renderNodesImpl=list;
+}
+function renderNodes(list){
+  const q=($("searchBox").value||"").trim().toLowerCase();
+  const vis=list.map((x,i)=>[x,i]).filter(([x])=>!q||x.name.toLowerCase().includes(q)||(x.region||"").toLowerCase().includes(q)||cnOf(x.region||"").includes(q));
+  $("grid").innerHTML=vis.map(([x,i])=>`
    <article class="card glass" onclick="openDetail(${i})">
      <div class="top"><span class="cc">${ccOf(x.region)}</span><span class="name">${esc(x.name)}</span><span class="sdot ${x.online?"":"off"}"></span></div>
      <div class="row2"><span class="sub">${esc(x.os||x.region||"")}</span>${x.tag?`<span class="tag">${esc(x.tag)}</span>`:""}</div>
@@ -431,7 +479,7 @@ function render(list){
      <span class="exp ${/^\d{4}-/.test(x.exp||"")?"":"okc"}">到期 ${esc(x.exp||"—")}</span></div>
    </article>`).join("");
   $("listView").innerHTML=`<div class="lrow head"><span></span><span>节点</span><span>CPU</span><span>内存</span><span>磁盘</span><span>速率 ↓ / ↑</span><span>在线</span><span>到期</span></div>`+
-   list.map((x,i)=>`<div class="lrow" onclick="openDetail(${i})">
+   vis.map(([x,i])=>`<div class="lrow" onclick="openDetail(${i})">
      <span class="sdot ${x.online?"":"off"}" style="margin:0"></span>
      <span><b>${esc(x.name)}</b> <span style="color:var(--faint)">${ccOf(x.region)}</span></span>
      <span class="mini"><span style="width:34px">${x.cpu??"–"}%</span><span class="bar ${cls(x.cpu)}"><i style="width:${x.cpu||0}%"></i></span></span>
@@ -439,6 +487,30 @@ function render(list){
      <span class="mini"><span style="width:34px">${x.disk??"–"}%</span><span class="bar ${cls(x.disk)}"><i style="width:${x.disk||0}%"></i></span></span>
      <span>${fmtSp(x.down)} / ${fmtSp(x.up)}</span><span>${fmtUp(x.uptime).replace("在线 ","")}</span>
      <span class="${/^\d{4}-/.test(x.exp||"")?"exp":""}">${esc(x.exp||"—")}</span></div>`).join("");
+}
+function daysLeft(exp){ if(!/^\d{4}-/.test(exp||"")) return null; return Math.ceil((new Date(exp+"T23:59:59")-new Date())/864e5); }
+function renderBill(list){
+  const rows=list.map(x=>{
+    const dl=daysLeft(x.exp);
+    const price=typeof x.price==="number"?x.price:null;
+    const cyc=x.cycle||365;
+    const val=price!=null&&dl!=null?Math.max(0,price*Math.min(dl,cyc)/cyc):null;
+    const monthly=price!=null?price*30/cyc:null;
+    return {x,dl,price,val,monthly};
+  });
+  const mSum=rows.reduce((a,r)=>a+(r.monthly||0),0);
+  $("bMonth").textContent="¥"+Math.round(mSum);
+  $("bYear").textContent="¥"+Math.round(mSum*12);
+  $("bSoon").textContent=rows.filter(r=>r.dl!=null&&r.dl<=30).length+" 台";
+  $("bValue").textContent="¥"+Math.round(rows.reduce((a,r)=>a+(r.val||0),0));
+  $("billList").innerHTML=`<div class="brow head"><span>节点</span><span>价格</span><span>周期</span><span>到期</span><span>剩余天数</span><span>剩余价值</span></div>`+
+   rows.map(({x,dl,price,val})=>`<div class="brow">
+     <span><b>${esc(x.name)}</b> <span style="color:var(--faint)">${cnOf(x.region||"")}</span></span>
+     <span>${price!=null?esc(x.cur||"¥")+price:"—"}</span>
+     <span>${price!=null?((x.cycle||365)===365?"年付":(x.cycle||365)===30?"月付":(x.cycle||365)+" 天"):"—"}</span>
+     <span>${esc(x.exp||"—")}</span>
+     <span>${dl!=null?`${dl} 天<div class="daysbar"><i style="width:${Math.max(2,Math.min(100,dl/(x.cycle||365)*100))}%"></i></div>`:"长期 / 免费"}</span>
+     <span style="font-weight:700">${val!=null?"¥"+Math.round(val):"—"}</span></div>`).join("");
 }
 function openDetail(i){
   curNode=NODES[i]; if(!curNode)return;
@@ -478,16 +550,31 @@ function tickClock(){
   const d=new Date();
   $("clockT").textContent=d.toLocaleTimeString("zh-CN",{hour12:false});
   $("clockD").textContent=d.toLocaleDateString("zh-CN",{month:"long",day:"numeric",weekday:"long"})+" · 本地时间";
+  const sc=$("stClock2"); if(sc) sc.textContent=d.toLocaleTimeString("zh-CN",{hour12:false});
 }
 tickClock(); setInterval(tickClock,1000);
 setInterval(()=>{ if(DEMO_MODE){ const j=()=>0.82+Math.random()*0.36;
   netPush(NET.up.at(-1)*j()||5.8e6, NET.down.at(-1)*j()||8.1e6); } },2000);
+$("searchBox").addEventListener("input",()=>{ if(NODES.length) renderNodes(NODES); });
+document.querySelectorAll(".dbtn").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll(".dbtn").forEach(x=>x.classList.toggle("on",x===b));
+  const min={2:540,3:400,4:300}[b.dataset.cols]||400;
+  $("grid").style.gridTemplateColumns=`repeat(auto-fill,minmax(${min}px,1fr))`;
+}));
+$("navTabs").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b)return;
+  document.querySelectorAll("#navTabs button").forEach(x=>x.classList.toggle("on",x===b));
+  const bill=b.dataset.p==="bill";
+  $("billView").classList.toggle("hidden",!bill);
+  $("homeView").classList.toggle("hidden",bill);
+  if(bill)$("detailView").classList.add("hidden");
+});
 async function load(){
   try{
     const pub=await (await fetch("/api/public")).json();
     const ts=(pub&&pub.data&&pub.data.theme_settings)||{};
     if(ts.refreshSeconds)settings.refreshSeconds=+ts.refreshSeconds||10;
-    if(pub&&pub.data&&pub.data.sitename){$("siteName").textContent=pub.data.sitename;$("avatarTx").textContent=pub.data.sitename.slice(0,1)}
+    if(pub&&pub.data&&pub.data.sitename){$("siteName").textContent=pub.data.sitename;$("avatarTx").textContent=pub.data.sitename.slice(0,1);$("heroName").textContent=pub.data.sitename}
   }catch(e){}
   try{
     const nodes=await rpc("common:getNodes");
