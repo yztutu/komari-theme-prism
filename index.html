@@ -7,69 +7,78 @@
 <style>
   :root{
     --txt:#eef3f9; --dim:#a7b3c6; --faint:#7c879c;
-    --glass:rgba(255,255,255,.055); --glass2:rgba(255,255,255,.085);
-    --edge:rgba(255,255,255,.11); --edge2:rgba(255,255,255,.18);
-    --acc:#4cc9ff; --teal:#2fe6b4; --amber:#ffbe50; --red:#ff6b6b;
+    --glass:rgba(255,255,255,.055); --glass2:rgba(255,255,255,.09);
+    --edge:rgba(255,255,255,.11); --edge2:rgba(255,255,255,.2);
+    --acc:#4cc9ff; --teal:#2fe6b4; --amber:#ffbe50; --red:#ff6b6b; --violet:#b78cff;
     --r:20px; --shadow:0 18px 50px rgba(2,6,18,.45);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{min-height:100%}
-  body{
-    font-family:"PingFang SC","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-    color:var(--txt); background:#0a0d1a; overflow-x:hidden;
-  }
+  body{font-family:"PingFang SC","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--txt);background:#0a0d1a;overflow-x:hidden}
   body::before{content:"";position:fixed;inset:0;z-index:-2;background:
-    radial-gradient(720px 420px at 12% -6%, rgba(56,150,200,.34), transparent 62%),
-    radial-gradient(820px 520px at 96% 108%, rgba(112,64,190,.32), transparent 62%),
-    radial-gradient(560px 360px at 58% 30%, rgba(30,110,140,.16), transparent 65%),
-    linear-gradient(180deg,#0a0e1e 0%,#0a0d1a 55%,#0c0a1c 100%);}
-  body::after{content:"";position:fixed;inset:0;z-index:-1;opacity:.5;
-    background-image:radial-gradient(rgba(255,255,255,.16) .6px, transparent .7px);background-size:130px 130px;
-    mask-image:linear-gradient(180deg,rgba(0,0,0,.5),transparent 42%);}
+    radial-gradient(760px 440px at 10% -6%, rgba(56,150,200,.36), transparent 62%),
+    radial-gradient(840px 540px at 97% 110%, rgba(112,64,190,.34), transparent 62%),
+    radial-gradient(600px 380px at 60% 26%, rgba(30,110,140,.18), transparent 65%),
+    linear-gradient(180deg,#0a0e1e,#0a0d1a 55%,#0d0a1e);}
+  body::after{content:"";position:fixed;inset:0;z-index:-1;opacity:.45;
+    background-image:radial-gradient(rgba(255,255,255,.15) .6px, transparent .7px);background-size:130px 130px;
+    mask-image:linear-gradient(180deg,rgba(0,0,0,.5),transparent 40%);}
   .wrap{max-width:1240px;margin:0 auto;padding:30px 22px 46px}
   header{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
   .title{display:flex;align-items:baseline;gap:12px}
-  .title h1{font-size:25px;font-weight:700;letter-spacing:.02em}
+  .title h1{font-size:26px;font-weight:750;background:linear-gradient(90deg,#fff,#9fd8ff 60%,#c9b3ff);-webkit-background-clip:text;background-clip:text;color:transparent}
   .title span{color:var(--dim);font-size:13px;letter-spacing:.08em}
-  .live{display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;
-    background:var(--glass);border:1px solid var(--edge);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-    font-size:13px;color:var(--dim)}
-  .dot{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 10px var(--teal)}
+  .live{display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:var(--glass);border:1px solid var(--edge);backdrop-filter:blur(14px);font-size:13px;color:var(--dim)}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 10px var(--teal);animation:pulse 2s infinite}
+  @keyframes pulse{50%{opacity:.45}}
   .dot.bad{background:var(--red);box-shadow:0 0 10px var(--red)}
-  .glass{background:var(--glass);border:1px solid var(--edge);border-radius:var(--r);
-    backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);
-    box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.07)}
+  .glass{background:var(--glass);border:1px solid var(--edge);border-radius:var(--r);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.07)}
   .overview{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:20px}
-  .ov{padding:16px 20px}
-  .ov .k{font-size:12px;color:var(--faint);letter-spacing:.14em}
-  .ov .v{font-size:25px;font-weight:700;margin-top:5px;display:inline-block}
-  .ov .s{color:var(--dim);font-size:12px;margin-left:10px}
+  .ov{padding:16px 20px}.ov .k{font-size:12px;color:var(--faint);letter-spacing:.14em}
+  .ov .v{font-size:25px;font-weight:700;margin-top:5px;display:inline-block}.ov .s{color:var(--dim);font-size:12px;margin-left:10px}
+  .hero{display:grid;grid-template-columns:1.55fr 1fr;gap:16px;margin-top:16px}
+  .panel{padding:18px 22px}
+  .panel h3{font-size:13px;letter-spacing:.16em;color:var(--dim);font-weight:600;display:flex;justify-content:space-between;align-items:center}
+  .panel h3 .big{font-size:12px;color:var(--faint);letter-spacing:.05em}
+  .legend{display:flex;gap:16px;margin-top:8px;font-size:12px;color:var(--dim)}
+  .legend i{display:inline-block;width:16px;height:3px;border-radius:2px;margin-right:6px;vertical-align:middle}
+  .wall{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+  .svc{border:1px solid var(--edge);border-radius:14px;padding:10px 12px;background:rgba(255,255,255,.04)}
+  .svc .n{font-size:13px;font-weight:650}
+  .svc .s{font-size:11.5px;margin-top:3px}
+  .ok{color:var(--teal)} .no{color:var(--red)} .part{color:var(--amber)}
+  .purity{display:flex;align-items:center;gap:14px;margin-top:14px}
+  .purity .num{font-size:34px;font-weight:800;color:var(--teal)}
+  .purity .txt{font-size:12px;color:var(--dim);line-height:1.6}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(352px,1fr));gap:16px;margin-top:18px}
-  .card{padding:20px 22px 16px;transition:transform .25s ease,border-color .25s ease,background .25s ease}
+  .card{padding:20px 22px 16px;transition:transform .25s,border-color .25s,background .25s}
   .card:hover{transform:translateY(-3px);border-color:var(--edge2);background:var(--glass2)}
   .card .top{display:flex;align-items:center;gap:10px}
-  .cc{font-size:11px;font-weight:700;letter-spacing:.08em;padding:4px 8px;border-radius:8px;
-    background:rgba(255,255,255,.09);border:1px solid var(--edge)}
+  .cc{font-size:11px;font-weight:700;letter-spacing:.08em;padding:4px 8px;border-radius:8px;background:rgba(255,255,255,.09);border:1px solid var(--edge)}
   .name{font-size:17px;font-weight:650}
   .sdot{margin-left:auto;width:9px;height:9px;border-radius:50%;background:var(--teal);box-shadow:0 0 9px var(--teal)}
   .sdot.off{background:var(--red);box-shadow:0 0 9px var(--red)}
-  .sub{color:var(--dim);font-size:12.5px;margin-top:7px}
-  .tag{margin-left:auto;font-size:11px;color:var(--acc);padding:4px 10px;border-radius:999px;
-    border:1px solid rgba(76,201,255,.4);background:rgba(76,201,255,.09)}
-  .row2{display:flex;align-items:center;margin-top:6px}
-  .meters{margin-top:15px;display:grid;gap:11px}
+  .sub{color:var(--dim);font-size:12.5px}
+  .row2{display:flex;align-items:center;margin-top:7px}
+  .tag{margin-left:auto;font-size:11px;color:var(--acc);padding:4px 10px;border-radius:999px;border:1px solid rgba(76,201,255,.4);background:rgba(76,201,255,.09)}
+  .meters{margin-top:14px;display:grid;gap:10px}
   .m{display:grid;grid-template-columns:38px 44px 1fr;align-items:center;gap:9px;font-size:12.5px}
   .m .lab{color:var(--dim)} .m .val{font-weight:650;text-align:right}
   .bar{height:6px;border-radius:3px;background:rgba(255,255,255,.09);overflow:hidden}
   .bar i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,#2ea8e0,var(--acc))}
-  .bar.hot i{background:linear-gradient(90deg,#e08a2e,var(--amber))}
-  .bar.crit i{background:linear-gradient(90deg,#e04b4b,var(--red))}
-  .foot{margin-top:15px;padding-top:12px;border-top:1px solid rgba(255,255,255,.07);
-    display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;color:var(--dim);font-size:12.5px}
+  .bar.hot i{background:linear-gradient(90deg,#e08a2e,var(--amber))} .bar.crit i{background:linear-gradient(90deg,#e04b4b,var(--red))}
+  .spark{margin-top:13px}
+  .spark .lab{font-size:11px;color:var(--faint);letter-spacing:.1em;margin-bottom:4px}
+  .badges{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+  .bdg{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:7px;letter-spacing:.03em}
+  .bdg.ok{background:rgba(47,230,180,.13);color:var(--teal);border:1px solid rgba(47,230,180,.35)}
+  .bdg.no{background:rgba(255,107,107,.1);color:var(--red);border:1px solid rgba(255,107,107,.3)}
+  .bdg.part{background:rgba(255,190,80,.12);color:var(--amber);border:1px solid rgba(255,190,80,.35)}
+  .pchip{margin-left:auto;font-size:11px;color:var(--dim)} .pchip b{color:var(--teal);font-size:12.5px}
+  .foot{margin-top:13px;padding-top:11px;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;color:var(--dim);font-size:12.5px}
   .exp{color:var(--amber)} .exp.ok{color:var(--dim)}
   footer{margin-top:26px;display:flex;justify-content:space-between;color:#5d6879;font-size:11.5px;letter-spacing:.14em}
-  @media (max-width:900px){.overview{grid-template-columns:repeat(2,1fr)}}
-  @media (max-width:560px){.overview{grid-template-columns:1fr 1fr}.wrap{padding:20px 14px 36px}}
+  @media (max-width:960px){.hero{grid-template-columns:1fr}.overview{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:560px){.wrap{padding:20px 14px 36px}}
 </style>
 </head>
 <body>
@@ -82,12 +91,28 @@
   <section class="overview">
     <div class="ov glass"><div class="k">节点总数</div><span class="v" id="ovTotal">–</span><span class="s" id="ovRegions"></span></div>
     <div class="ov glass"><div class="k">在线率</div><span class="v" id="ovRate">–</span><span class="s">当前状态</span></div>
-    <div class="ov glass"><div class="k">总流量</div><span class="v" id="ovTraf">–</span><span class="s" id="ovTrafSub"></span></div>
+    <div class="ov glass"><div class="k">总流量</div><span class="v" id="ovTraf">–</span><span class="s">累计</span></div>
     <div class="ov glass"><div class="k">最近到期</div><span class="v" id="ovExp" style="font-size:20px">–</span><span class="s" id="ovExpSub"></span></div>
   </section>
 
-  <main class="grid" id="grid"></main>
+  <section class="hero">
+    <div class="panel glass">
+      <h3>三网延迟 · 线路赛马 <span class="big">哈尔滨视角 · ms</span></h3>
+      <div class="legend">
+        <span><i style="background:#4cc9ff"></i>电信 <b id="lgCt">–</b></span>
+        <span><i style="background:#2fe6b4"></i>联通 <b id="lgCu">–</b></span>
+        <span><i style="background:#b78cff"></i>移动 <b id="lgCm">–</b></span>
+      </div>
+      <svg id="race" viewBox="0 0 640 170" width="100%" height="170" preserveAspectRatio="none" style="margin-top:8px"></svg>
+    </div>
+    <div class="panel glass">
+      <h3>解锁墙 · IP 质量 <span class="big">全舰队汇总</span></h3>
+      <div class="wall" id="wall"></div>
+      <div class="purity"><div class="num" id="purityNum">–</div><div class="txt">平均 IP 纯净度<br>多源风险库合成 · 越高越干净</div></div>
+    </div>
+  </section>
 
+  <main class="grid" id="grid"></main>
   <footer><div>POWERED BY KOMARI MONITOR</div><div>PRISM THEME · BY YZTUTU</div></footer>
 </div>
 
@@ -99,37 +124,59 @@ const pct=(u,t)=>t>0?Math.min(100,Math.round(u/t*100)):null;
 const cls=p=>p==null?"":p>=90?"crit":p>=70?"hot":"";
 const pick=(o,ks)=>{for(const k of ks){if(o&&o[k]!=null)return o[k]}return undefined};
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const ccOf=r=>{const m={"United States":"US","South Korea":"KR","Korea":"KR","Germany":"DE","Hong Kong":"HK","Malaysia":"MY","Japan":"JP","Singapore":"SG","United Kingdom":"GB","China":"CN","Taiwan":"TW","France":"FR","Netherlands":"NL","Canada":"CA","Australia":"AU"};return m[r]||(r?r.slice(0,2).toUpperCase():"··")};
-
+const ccOf=r=>{const m={"United States":"US","South Korea":"KR","Korea":"KR","Germany":"DE","Hong Kong":"HK","Malaysia":"MY","Japan":"JP","Singapore":"SG","United Kingdom":"GB","China":"CN","Taiwan":"TW"};return m[r]||(r?r.slice(0,2).toUpperCase():"··")};
 let settings={refreshSeconds:10};
 async function rpc(method,params){const r=await fetch("/api/rpc2",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",method,params:params||{},id:1})});const j=await r.json();if(j.error)throw new Error(j.error.message);return j.result}
 
 const DEMO=[
- {name:"DMIT 洛杉矶",region:"United States",os:"Debian 12 · 4 核",cpu:12,mem:24,disk:31,up:3.1e6,down:4.9e6,uptime:864000,exp:"长期",tag:"CN2 精品",online:true},
- {name:"Oracle 春川",region:"South Korea",os:"Ubuntu 24.04 · 4 核",cpu:34,mem:40,disk:12,up:1.1e6,down:2.3e6,uptime:432000,exp:"免费",tag:"A1 大机",online:true},
- {name:"Netcup 德国",region:"Germany",os:"Debian 13 · 1 核",cpu:8,mem:41,disk:22,up:198e3,down:302e3,uptime:2592000,exp:"2027-02-04",tag:"监控中枢",online:true},
- {name:"WAWO 香港",region:"Hong Kong",os:"Debian 12 · 1 核",cpu:21,mem:44,disk:9,up:802e3,down:905e3,uptime:172800,exp:"2027-03-14",tag:"移动快线",online:true},
- {name:"青峰 马来西亚",region:"Malaysia",os:"Debian 12 · 2 核",cpu:5,mem:18,disk:15,up:640e3,down:720e3,uptime:1036800,exp:"长期",tag:"中转",online:true}
+ {name:"DMIT 洛杉矶",region:"United States",os:"Debian 12 · 4 核",cpu:12,mem:24,disk:31,up:3.1e6,down:4.9e6,uptime:864000,exp:"长期",tag:"CN2 精品",online:true,purity:92,unlock:{Netflix:"ok",Disney:"ok",YouTube:"ok",ChatGPT:"ok",Claude:"ok","B站":"part"},spark:[.4,.5,.45,.7,.6,.9,.75,.8,.65,.85,.7,.8]},
+ {name:"Oracle 春川",region:"South Korea",os:"Ubuntu 24.04 · 4 核",cpu:34,mem:40,disk:12,up:1.1e6,down:2.3e6,uptime:432000,exp:"免费",tag:"A1 大机",online:true,purity:100,unlock:{Netflix:"part",Disney:"no",YouTube:"ok",ChatGPT:"ok",Claude:"ok","B站":"ok"},spark:[.3,.35,.5,.42,.6,.55,.7,.5,.62,.58,.66,.6]},
+ {name:"Netcup 德国",region:"Germany",os:"Debian 13 · 1 核",cpu:8,mem:41,disk:22,up:198e3,down:302e3,uptime:2592000,exp:"2027-02-04",tag:"监控中枢",online:true,purity:88,unlock:{Netflix:"ok",Disney:"ok",YouTube:"ok",ChatGPT:"ok",Claude:"ok","B站":"no"},spark:[.2,.22,.19,.25,.21,.24,.2,.23,.22,.21,.24,.22]},
+ {name:"WAWO 香港",region:"Hong Kong",os:"Debian 12 · 1 核",cpu:21,mem:44,disk:9,up:802e3,down:905e3,uptime:172800,exp:"2027-03-14",tag:"移动快线",online:true,purity:95,unlock:{Netflix:"ok",Disney:"ok",YouTube:"ok",ChatGPT:"ok",Claude:"part","B站":"ok"},spark:[.5,.6,.55,.8,.7,.9,.75,.85,.7,.8,.78,.88]},
+ {name:"青峰 马来西亚",region:"Malaysia",os:"Debian 12 · 2 核",cpu:5,mem:18,disk:15,up:640e3,down:720e3,uptime:1036800,exp:"长期",tag:"中转",online:true,purity:90,unlock:{Netflix:"part",Disney:"no",YouTube:"ok",ChatGPT:"ok",Claude:"ok","B站":"no"},spark:[.3,.4,.35,.45,.4,.5,.42,.48,.44,.5,.46,.52]}
 ];
+const RACE={ct:[172,170,175,171,173,170,174,172,171,173,170,172],cu:[186,190,184,188,185,189,186,187,184,186,188,185],cm:[158,162,155,160,157,163,159,161,156,160,158,161]};
 
+function sparkSVG(data,color){
+  const w=320,h=38,max=Math.max(...data,1)*1.15;
+  const pts=data.map((v,i)=>`${(i/(data.length-1))*w},${h-(v/max)*h}`).join(" ");
+  return `<svg viewBox="0 0 ${w} ${h}" width="100%" height="${h}" preserveAspectRatio="none"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2" stroke-linejoin="round" opacity=".9"/><polygon points="0,${h} ${pts} ${w},${h}" fill="${color}" opacity=".10"/></svg>`;
+}
+function raceSVG(){
+  const all=[...RACE.ct,...RACE.cu,...RACE.cm],min=Math.min(...all)*0.92,max=Math.max(...all)*1.05;
+  const line=(arr,color)=>{const pts=arr.map((v,i)=>`${(i/(arr.length-1))*640},${170-((v-min)/(max-min))*150-8}`).join(" ");
+    return `<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2.4" stroke-linejoin="round"/><polygon points="0,170 ${pts} 640,170" fill="${color}" opacity=".07"/>`};
+  $("lgCt").textContent=RACE.ct[RACE.ct.length-1]+" ms";$("lgCu").textContent=RACE.cu[RACE.cu.length-1]+" ms";$("lgCm").textContent=RACE.cm[RACE.cm.length-1]+" ms";
+  return line(RACE.ct,"#4cc9ff")+line(RACE.cu,"#2fe6b4")+line(RACE.cm,"#b78cff");
+}
+function renderWall(list){
+  const svcs=["Netflix","Disney","YouTube","ChatGPT","Claude","B站"];
+  $("wall").innerHTML=svcs.map(s=>{
+    const states=list.map(x=>(x.unlock||{})[s]).filter(Boolean);
+    const ok=states.filter(v=>v==="ok").length, part=states.filter(v=>v==="part").length;
+    const label=ok===states.length&&states.length?["全舰队解锁","ok"]:ok+part>0&&ok>0?["部分解锁","part"]:["多数不可用","no"];
+    return `<div class="svc"><div class="n">${s}</div><div class="s ${label[1]}">${label[0]} · ${ok}/${states.length||list.length}</div></div>`;
+  }).join("");
+  const ps=list.map(x=>x.purity).filter(v=>typeof v==="number");
+  $("purityNum").textContent=ps.length?Math.round(ps.reduce((a,b)=>a+b,0)/ps.length):"–";
+}
 function normalize(nodesRaw,statusRaw){
   const nodes=Array.isArray(nodesRaw)?nodesRaw:(nodesRaw&&nodesRaw.nodes)||[];
   const st=statusRaw||{};
   return nodes.map(n=>{
     const s=st[n.uuid]||st[n.id]||{};
     const cpu=pick(s.cpu,["usage","percent"])??pick(s,["cpu_usage","cpu"]);
-    const ramU=pick(s.ram,["used"])??pick(s,["mem_used","ram_used"]);
-    const ramT=pick(s.ram,["total"])??n.mem_total??pick(s,["mem_total","ram_total"]);
+    const ramU=pick(s.ram,["used"])??pick(s,["mem_used","ram_used"]); const ramT=pick(s.ram,["total"])??n.mem_total??pick(s,["mem_total","ram_total"]);
     const dU=pick(s.disk,["used"])??pick(s,["disk_used"]); const dT=pick(s.disk,["total"])??n.disk_total??pick(s,["disk_total"]);
     const up=pick(s.network,["up","upload"])??pick(s,["net_up","up"]); const down=pick(s.network,["down","download"])??pick(s,["net_down","down"]);
     const tU=pick(s.network,["totalUp","total_up"])??0, tD=pick(s.network,["totalDown","total_down"])??0;
     return {name:n.name||n.uuid,region:n.region||n.country||"",os:[n.os,n.cpu_cores?n.cpu_cores+" 核":""].filter(Boolean).join(" · "),
       cpu:typeof cpu==="number"?Math.round(cpu):null,mem:pct(ramU,ramT),disk:pct(dU,dT),up,down,total:(+tU||0)+(+tD||0),
       uptime:pick(s,["uptime"]),exp:n.expired_at?String(n.expired_at).slice(0,10):"长期",tag:n.group||"",
-      online:s.online!==false&&(s.online===true||cpu!==undefined||ramU!==undefined||up!==undefined)};
+      online:s.online!==false&&(s.online===true||cpu!==undefined||ramU!==undefined||up!==undefined),
+      purity:undefined,unlock:{},spark:[.3,.4,.35,.5,.45,.55,.5,.6,.55,.5,.58,.52]};
   });
 }
-
 function render(list){
   const on=list.filter(x=>x.online).length;
   $("ovTotal").textContent=list.length;
@@ -137,25 +184,30 @@ function render(list){
   $("ovRegions").textContent=regs.length?regs.length+" 个国家 / 地区":"";
   $("ovRate").textContent=list.length?Math.round(on/list.length*100)+"%":"–";
   $("ovTraf").textContent=fmtB(list.reduce((a,x)=>a+(x.total||0),0));
-  $("ovTrafSub").textContent="累计";
   const dated=list.filter(x=>x.exp&&/^\d{4}-/.test(x.exp)).sort((a,b)=>a.exp<b.exp?-1:1)[0];
   if(dated){$("ovExp").textContent=dated.name;$("ovExpSub").textContent=dated.exp}else{$("ovExp").textContent="无";$("ovExpSub").textContent=""}
   $("liveDot").className="dot"+(on<list.length?" bad":"");
   $("liveText").textContent=`在线 ${on} / ${list.length} · 刚刚更新`;
+  $("race").innerHTML=raceSVG();
+  renderWall(list);
   $("grid").innerHTML=list.map(x=>`
    <article class="card glass">
      <div class="top"><span class="cc">${ccOf(x.region)}</span><span class="name">${esc(x.name)}</span><span class="sdot ${x.online?"":"off"}"></span></div>
-     <div class="row2"><span class="sub" style="margin-top:0">${esc(x.os||x.region||"")}</span>${x.tag?`<span class="tag">${esc(x.tag)}</span>`:""}</div>
+     <div class="row2"><span class="sub">${esc(x.os||x.region||"")}</span>${x.tag?`<span class="tag">${esc(x.tag)}</span>`:""}</div>
      <div class="meters">
        ${[["CPU",x.cpu],["内存",x.mem],["磁盘",x.disk]].map(([l,v])=>`
        <div class="m"><span class="lab">${l}</span><span class="val">${v==null?"–":v+"%"}</span>
        <div class="bar ${cls(v)}"><i style="width:${v||0}%"></i></div></div>`).join("")}
      </div>
+     <div class="spark"><div class="lab">流量趋势</div>${sparkSVG(x.spark||[.3,.4,.35,.5,.45,.55,.5,.6,.55,.5,.58,.52],"#4cc9ff")}</div>
+     <div class="badges">
+       ${Object.entries(x.unlock||{}).map(([k,v])=>`<span class="bdg ${v}">${k}</span>`).join("")}
+       ${typeof x.purity==="number"?`<span class="pchip">纯净度 <b>${x.purity}</b></span>`:""}
+     </div>
      <div class="foot"><span>↑ ${fmtB(x.up)}/s&nbsp;&nbsp;↓ ${fmtB(x.down)}/s</span><span>${fmtUp(x.uptime)}</span>
      <span class="exp ${/^\d{4}-/.test(x.exp||"")?"":"ok"}">到期 ${esc(x.exp||"—")}</span></div>
    </article>`).join("");
 }
-
 async function load(){
   try{
     const pub=await (await fetch("/api/public")).json();
